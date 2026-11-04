@@ -25,8 +25,8 @@ To activate accounts and cloud saves:
 1. Create a Supabase project and run `supabase-schema.sql` in its SQL Editor.
 2. In `supabase-config.js`, set the project URL and publishable (or legacy anon) key. These are the only keys that belong in browser code.
 3. Add the GitHub Pages site URL to Supabase Auth's Site URL and redirect URL settings.
-4. Install the Supabase CLI, link this project, and deploy `supabase/functions/username-login` with `supabase/config.toml` from this folder. Set `SUPABASE_SERVICE_ROLE_KEY` as an Edge Function secret; never put it in `supabase-config.js` or any browser file. The function uses the project's `SUPABASE_URL` and its public anon/publishable key.
-5. In Supabase Auth, add the GitHub Pages URL to the allowed site and redirect URLs. Enable email confirmation if you want verified email addresses before first login.
+4. Install the Supabase CLI, then from this folder run `supabase login`, `supabase link --project-ref YOUR_PROJECT_REF`, and `supabase functions deploy username-login`. The function reads the project's built-in server key inside the Edge Function runtime; never copy any secret key into browser code or chat.
+5. In Supabase Auth > URL Configuration, set the Site URL to `https://qkqkroa67.github.io/golden-baccarat/` and add that same URL to the allowed Redirect URLs. Email confirmation is enabled by default on hosted projects; verify the link before the first login.
 
 The database trigger creates a private ID-to-account mapping, and the public login function returns only a normal Supabase sign-in session. Cloud saves are restricted to each signed-in player's own account. Room creation, joining, host election, stale-member cleanup, and round updates go through authenticated database functions; Realtime row subscriptions are limited to room members. The login and game buttons remain in local-demo mode until the project keys, SQL, and function are configured.
 
