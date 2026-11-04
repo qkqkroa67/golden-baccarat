@@ -13,10 +13,10 @@ Static frontend for the Golden Baccarat prototype. The entry, baccarat table, mi
 
 ## Online play status
 
-The site is currently a single-device demo. Room creation and joining, bankroll, purchases, rewards, friends, and leaderboard are local browser state. Real shared rooms require a backend that validates membership and rewards and synchronizes room state across devices.
+GitHub Pages hosts the static game. The Supabase setup in `supabase-schema.sql` adds saved accounts, shared rooms, room membership, realtime room updates, and shared baccarat results. Until a Supabase project is connected in `supabase-config.js` and the SQL is run, the live site stays in local-demo mode.
 
 
-## Account signup, username login, and cloud saves
+## Account signup, username login, cloud saves, and online rooms
 
 Signup asks for email, password, and a unique login ID (3–20 lowercase English letters, digits, or underscores). Login asks for the ID and password. The game nickname is a separate field. Supabase Auth still verifies the password against the registered email behind the scenes.
 
@@ -26,6 +26,7 @@ To activate accounts and cloud saves:
 2. In `supabase-config.js`, set the project URL and publishable (or legacy anon) key. These are the only keys that belong in browser code.
 3. Add the GitHub Pages site URL to Supabase Auth's Site URL and redirect URL settings.
 4. Install the Supabase CLI, link this project, and deploy `supabase/functions/username-login` with `supabase/config.toml` from this folder. Set `SUPABASE_SERVICE_ROLE_KEY` as an Edge Function secret; never put it in `supabase-config.js` or any browser file. The function uses the project's `SUPABASE_URL` and its public anon/publishable key.
+5. In Supabase Auth, add the GitHub Pages URL to the allowed site and redirect URLs. Enable email confirmation if you want verified email addresses before first login.
 
-The database trigger creates a private ID-to-account mapping, and the public login function returns only the normal Supabase sign-in session. Cloud game saves stay protected by per-user row-level security. Until the project keys, SQL, and function are configured, the account buttons remain disabled.
+The database trigger creates a private ID-to-account mapping, and the public login function returns only a normal Supabase sign-in session. Cloud saves are restricted to each signed-in player's own account. Room creation, joining, host election, stale-member cleanup, and round updates go through authenticated database functions; Realtime row subscriptions are limited to room members. The login and game buttons remain in local-demo mode until the project keys, SQL, and function are configured.
 
