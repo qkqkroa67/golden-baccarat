@@ -16,7 +16,16 @@ Static frontend for the Golden Baccarat prototype. The entry, baccarat table, mi
 The site is currently a single-device demo. Room creation and joining, bankroll, purchases, rewards, friends, and leaderboard are local browser state. Real shared rooms require a backend that validates membership and rewards and synchronizes room state across devices.
 
 
-## Email account saves
+## Account signup, username login, and cloud saves
 
-The browser integration is in `auth.js`. To activate it, create a Supabase project, run `supabase-schema.sql` in its SQL Editor, then fill `supabase-config.js` with the Project URL and publishable (or legacy anon) key. Add the GitHub Pages site URL to Supabase Auth's Site URL and redirect URL settings. Never put a `service_role` or secret key in browser code.
+Signup asks for email, password, and a unique login ID (3–20 lowercase English letters, digits, or underscores). Login asks for the ID and password. The game nickname is a separate field. Supabase Auth still verifies the password against the registered email behind the scenes.
+
+To activate accounts and cloud saves:
+
+1. Create a Supabase project and run `supabase-schema.sql` in its SQL Editor.
+2. In `supabase-config.js`, set the project URL and publishable (or legacy anon) key. These are the only keys that belong in browser code.
+3. Add the GitHub Pages site URL to Supabase Auth's Site URL and redirect URL settings.
+4. Install the Supabase CLI, link this project, and deploy `supabase/functions/username-login` with `supabase/config.toml` from this folder. Set `SUPABASE_SERVICE_ROLE_KEY` as an Edge Function secret; never put it in `supabase-config.js` or any browser file. The function also uses the project's built-in `SUPABASE_URL` and `SUPABASE_ANON_KEY` secrets.
+
+The database trigger creates a private ID-to-account mapping, and the public login function returns only the normal Supabase sign-in session. Cloud game saves stay protected by per-user row-level security. Until the project keys, SQL, and function are configured, the account buttons remain disabled.
 
