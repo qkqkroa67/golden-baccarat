@@ -25,7 +25,7 @@ To activate accounts and cloud saves:
 1. Create a Supabase project and run `supabase-schema.sql` in its SQL Editor.
 2. In `supabase-config.js`, set the project URL and publishable (or legacy anon) key. These are the only keys that belong in browser code.
 3. Add the GitHub Pages site URL to Supabase Auth's Site URL and redirect URL settings.
-4. Install the Supabase CLI, link this project, and deploy `supabase/functions/username-login` with `supabase/config.toml` from this folder. Set `SUPABASE_SERVICE_ROLE_KEY` as an Edge Function secret; never put it in `supabase-config.js` or any browser file. The function also uses the project's built-in `SUPABASE_URL` and `SUPABASE_ANON_KEY` secrets.
+4. Install the Supabase CLI, link this project, and deploy `supabase/functions/username-login` with `supabase/config.toml` from this folder. Set `SUPABASE_SERVICE_ROLE_KEY` as an Edge Function secret; never put it in `supabase-config.js` or any browser file. The function uses the project's `SUPABASE_URL` and its public anon/publishable key.
 
 The database trigger creates a private ID-to-account mapping, and the public login function returns only the normal Supabase sign-in session. Cloud game saves stay protected by per-user row-level security. Until the project keys, SQL, and function are configured, the account buttons remain disabled.
 
