@@ -15,3 +15,8 @@ Static frontend for the Golden Baccarat prototype. The entry, baccarat table, mi
 
 The site is currently a single-device demo. Room creation and joining, bankroll, purchases, rewards, friends, and leaderboard are local browser state. Real shared rooms require a backend that validates membership and rewards and synchronizes room state across devices.
 
+
+## Email account saves
+
+The browser integration is in `auth.js`. To activate it, create a Supabase project, run `supabase-schema.sql` in its SQL Editor, then fill `supabase-config.js` with the Project URL and publishable (or legacy anon) key. Add the GitHub Pages site URL to Supabase Auth's Site URL and redirect URL settings. Never put a `service_role` or secret key in browser code.
+
