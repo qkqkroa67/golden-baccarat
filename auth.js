@@ -16,6 +16,7 @@
   const configReady = Boolean(window.GB_SUPABASE_URL && window.GB_SUPABASE_PUBLISHABLE_KEY && window.supabase?.createClient);
   window.GB_AUTH_ENABLED = configReady;
   window.GB_AUTH_USER = null;
+  window.GB_SUPABASE_CLIENT = null;
   if (!usernameInput || !status) return;
 
   const setStatus = (message, error = false) => {
@@ -44,6 +45,7 @@
   }
 
   const client = window.supabase.createClient(window.GB_SUPABASE_URL, window.GB_SUPABASE_PUBLISHABLE_KEY);
+  window.GB_SUPABASE_CLIENT = client;
   let currentUser = null;
   let applyingCloudState = false;
   let saveTimer = null;
