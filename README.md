@@ -1,6 +1,6 @@
 # Golden Baccarat
 
-Static frontend for the Golden Baccarat prototype. The entry, baccarat table, mini-game, and lounge are separate pages. Deploy the contents of this folder from the repository root (for example, with GitHub Pages).
+Static frontend for the Golden Baccarat prototype. The entry, baccarat table, mini-game, and lounge are separate pages. Navigation between game pages goes through the entry lobby. Deploy the contents of this folder from the repository root (for example, with GitHub Pages).
 
 ## Included
 
