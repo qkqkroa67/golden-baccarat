@@ -1,6 +1,6 @@
 # Golden Baccarat
 
-Static frontend for the Golden Baccarat prototype. Deploy the contents of this folder from the repository root (for example, with GitHub Pages).
+Static frontend for the Golden Baccarat prototype. The entry, baccarat table, mini-game, and lounge are separate pages. Deploy the contents of this folder from the repository root (for example, with GitHub Pages).
 
 ## Included
 
@@ -14,3 +14,4 @@ Static frontend for the Golden Baccarat prototype. Deploy the contents of this f
 ## Online play status
 
 The site is currently a single-device demo. Room creation and joining, bankroll, purchases, rewards, friends, and leaderboard are local browser state. Real shared rooms require a backend that validates membership and rewards and synchronizes room state across devices.
+
