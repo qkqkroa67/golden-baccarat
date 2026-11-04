@@ -6,7 +6,7 @@ Static frontend for the Golden Baccarat prototype. The entry, baccarat table, mi
 
 - Baccarat with chip bets, slow sequential card dealing, Punto Banco third-card rules and payouts.
 - 20-column x 6-row result road with P/B/T as equal outcomes, streaks flowing down and along the bottom row, and reset after column 20.
-- 30-second Chip Catcher mini-game. Each catch adds 20 virtual chips, capped at 500 per session. Chips feed the same bankroll used for baccarat.
+- Mini-game hall with a quick-tap button that awards 500 virtual chips per tap and a 30-second Chip Catcher that awards 700 chips immediately for each catch. Both feed the baccarat bankroll.
 - House and character cosmetic purchases using chips; baccarat rounds add fame toward player tiers.
 - Local friend list; global rankings and live friend connections are marked for later backend integration.
 - PWA manifest and service worker scaffolding.
