@@ -27,8 +27,10 @@ Deno.serve(async (request) => {
     const url = Deno.env.get('SUPABASE_URL');
     // A public project key is sent by the browser's Supabase client as `apikey`.
     // This also supports projects that use publishable keys without a legacy anon key.
-    const anonKey = Deno.env.get('SUPABASE_ANON_KEY') || request.headers.get('apikey');
-    const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const publishableKeys = JSON.parse(Deno.env.get('SUPABASE_PUBLISHABLE_KEYS') || '{}');
+    const secretKeys = JSON.parse(Deno.env.get('SUPABASE_SECRET_KEYS') || '{}');
+    const anonKey = Deno.env.get('SUPABASE_ANON_KEY') || publishableKeys.default || request.headers.get('apikey');
+    const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || secretKeys.default;
     if (!url || !anonKey || !serviceRoleKey) return json({ error: 'Authentication service is not configured' }, 500);
 
     const admin = createClient(url, serviceRoleKey, { auth: { autoRefreshToken: false, persistSession: false } });
